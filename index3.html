@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    //Кнопка для перехода на сайт
+<div class="button">
+    <a href="Ссылка либо страница"></a>
+</div>
+
+
+    <div class="user"></div>
+    <div class="email"></div>
+    <div class="phone"></div>
+
+    <script>
+        const requestURL = 'https://jsonplaceholder.typicode.com/users/4'
+
+        fetch(requestURL)
+        .then(response => {
+
+            if (response.ok) {
+                return response.json()
+            }
+
+            return response.json().then(error => {
+
+                const e = new Error('Что-то пошло не так')
+                e.data = error
+                throw e
+
+            })
+
+        }).then((data) => {
+
+            userFirst = document.querySelector('.user')
+            userFirst.innerHTML = data['name']
+
+            email = document.querySelector('.email')
+            email.innerHTML = data["email"]
+
+            phone = document.querySelector(".phone")
+            phone.innerHTML = data["phone"]
+
+            console.log(data);
+        })
+    </script>
+</body>
+</html>
